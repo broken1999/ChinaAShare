@@ -5,7 +5,7 @@ Here are two major pieces of codeL<br>
 * [ChinaAShare/main.py](https://github.com/broken1999/ChinaAShare/blob/master/main.py) is the main tool
 * [ChinaAshare/retrieve_2015_data/retrieve2015data.py](https://github.com/broken1999/ChinaAShare/blob/master/retrieve_2015_data/retrieve2015data.py) is the program used to download historical data of 2015. The year 2015 is chosen, because A share had a peak that can be used as an indicator of room for growth.
 
-## Prerequisite
+## Prerequisites
 Python 2, Numpy, Pandas, [TuShare](https://pypi.org/project/tushare/)
 
 ## Details of [ChinaAShare/main.py](https://github.com/broken1999/ChinaAShare/blob/master/main.py)
@@ -21,7 +21,7 @@ Python 2, Numpy, Pandas, [TuShare](https://pypi.org/project/tushare/)
 >002354   天神娱乐      互联网   4.74  10.11  0.468843<br>
 >002501   利源精制        铝   2.83   5.80  0.487931<br>
 >002122  \*ST天马     机械基件   1.88   3.80  0.494737<br>
-* Variables, functions and parameters explained: 
+* Variables, functions and parameters explained: <br> 
 `ctb` today's data. [details](http://tushare.org/trading.html#id3) <br>
 `basics` basic data of stocks. [details](http://tushare.org/trading.html#id3) <br>
 `PB()` a simple function to return the list of stocks with PB ratio falls in the range \[PB_rangemin,PB_rangemax\) <br>
