@@ -30,4 +30,4 @@ based on history, focused on present
 #### nice to have
 * data visualization, e.g. [heat map](https://github.com/FrankBGao/HeatMap_for_TuShare).
 ### Programming packages/projects involed:
-[TuShare project](http://tushare.org); Anaconda (Pandas, Numpy)
+[TuShare](http://tushare.org); Anaconda (Pandas, Numpy)
