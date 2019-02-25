@@ -16,7 +16,7 @@ Python 2, Numpy, Pandas, [TuShare](https://pypi.org/project/tushare/)
 1. Run [ChinaAShare/main.py](https://github.com/broken1999/ChinaAShare/blob/master/main.py) in Python 2. The most [recent daily data](http://tushare.org/trading.html#id4) will be loaded into memory and a copy of it will be saved on disk with name *.pkl.<br>
 2. Now we can play with the data stored in the variable called `ctb` and `basics`.<br>
 
-### Play with price-book value ratio (PB)
+#### Play with price-book value ratio (PB)
 * Sample input&output:<br>
 `PB_rangemin=0.01`<br>
 `PB_rangemax=0.5`<br>
