@@ -1,8 +1,5 @@
 # welcome to the user's guide.
-
-
-laste update: 2019 Feb 25
-
+<br>
 ## Overview
 This program is designed to play with the critical data of China A share. It serves as a **tool for stock selection**.<br>
 Here are two major pieces of codeL<br>
@@ -13,11 +10,11 @@ Here are two major pieces of codeL<br>
 Python 2, Numpy, Pandas, [TuShare](https://pypi.org/project/tushare/)
 
 ## Details of [ChinaAShare/main.py](https://github.com/broken1999/ChinaAShare/blob/master/main.py)
-1. Run [ChinaAShare/main.py](https://github.com/broken1999/ChinaAShare/blob/master/main.py) in Python 2. The most [recent daily data](http://tushare.org/trading.html#id4) will be loaded into memory and a copy of it will be saved on disk with name *.pkl.<br>
+1. Run [ChinaAShare/main.py](https://github.com/broken1999/ChinaAShare/blob/master/main.py) in Python 2. The most [recent daily data](http://tushare.org/trading.html#id4) will be loaded into memory and a copy of it will be saved on disk with name \*.pkl.<br>
 2. Now we can play with the data stored in the variable called `ctb` and `basics`.<br>
 
 #### Play with price-book value ratio (PB)
-* Sample input&output:<br>
+* Sample input and output:<br>
 `PB_rangemin=0.01`<br>
 `PB_rangemax=0.5`<br>
 `PB(ctb,PB_rangemin,PB_rangemax)`<br>
@@ -33,6 +30,10 @@ Python 2, Numpy, Pandas, [TuShare](https://pypi.org/project/tushare/)
 `PB_rangemax` the maximum of price-book value ratio, a selection criterion <br>
 
 
+## Details of [ChinaAshare/retrieve_2015_data/retrieve2015data.py](https://github.com/broken1999/ChinaAShare/blob/master/retrieve_2015_data/retrieve2015data.py)
+One does **NOT** need to run [ChinaAshare/retrieve_2015_data/retrieve2015data.py](https://github.com/broken1999/ChinaAShare/blob/master/retrieve_2015_data/retrieve2015data.py). The program is designed download to the hard disk the stock data of 2015, named as \*.pkl files. However, the \*.pkl files are given in the Github folder [ChinaAshare/retrieve_2015_data/](https://github.com/broken1999/ChinaAShare/blob/master/retrieve_2015_data/).
+* Sample input and output: None
+* Variables, functions and parameters explained: None
 
 
 
