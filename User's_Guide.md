@@ -21,7 +21,6 @@ Python 2, Numpy, Pandas, [TuShare](https://pypi.org/project/tushare/)
 `PB_rangemin=0.01`<br>
 `PB_rangemax=0.5`<br>
 `PB(ctb,PB_rangemin,PB_rangemax)`<br>
->        name industry  trade   bvps        PB<br>
 >002680  \*ST长生     生物制药   1.56   3.85  0.405195<br>
 >002354   天神娱乐      互联网   4.74  10.11  0.468843<br>
 >002501   利源精制        铝   2.83   5.80  0.487931<br>
