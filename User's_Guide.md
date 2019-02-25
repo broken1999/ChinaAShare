@@ -1,5 +1,4 @@
-# welcome to the user's guide.
-<br>
+# welcome to the user's guide.<br>
 ## Overview
 This program is designed to play with the critical data of China A share. It serves as a **tool for stock selection**.<br>
 Here are two major pieces of codeL<br>
