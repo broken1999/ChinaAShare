@@ -22,7 +22,7 @@ Python 2, Numpy, Pandas, [TuShare](https://pypi.org/project/tushare/)
 >002501   利源精制        铝   2.83   5.80  0.487931<br>
 >002122  \*ST天马     机械基件   1.88   3.80  0.494737<br>
 * Variables, functions and parameters explained: <br> 
-`ctb` today's data. [details](http://tushare.org/trading.html#id3) <br>
+`ctb` today's data. [details](http://tushare.org/trading.html#id4) <br>
 `basics` basic data of stocks. [details](http://tushare.org/trading.html#id3) <br>
 `PB()` a simple function to return the list of stocks with PB ratio falls in the range \[PB_rangemin,PB_rangemax\) <br>
 `PB_rangemin` the minimum of price-book value ratio, a selection criterion <br>
@@ -30,7 +30,7 @@ Python 2, Numpy, Pandas, [TuShare](https://pypi.org/project/tushare/)
 
 
 ## Details of [ChinaAshare/retrieve_2015_data/retrieve2015data.py](https://github.com/broken1999/ChinaAShare/blob/master/retrieve_2015_data/retrieve2015data.py)
-1. One does **NOT** need to run [ChinaAshare/retrieve_2015_data/retrieve2015data.py](https://github.com/broken1999/ChinaAShare/blob/master/retrieve_2015_data/retrieve2015data.py). The program is designed download the stock data of 2015 to the hard disk, named as \*.pkl files. However, the \*.pkl files are readily given in the Github folder [ChinaAshare/retrieve_2015_data/](https://github.com/broken1999/ChinaAShare/blob/master/retrieve_2015_data/).
+1. One does **NOT** need to run [ChinaAshare/retrieve_2015_data/retrieve2015data.py](https://github.com/broken1999/ChinaAShare/blob/master/retrieve_2015_data/retrieve2015data.py). The program is designed to download the stock data of 2015 to the hard disk, named as \*.pkl files. However, the \*.pkl files are readily given in the Github folder [ChinaAshare/retrieve_2015_data/](https://github.com/broken1999/ChinaAShare/blob/master/retrieve_2015_data/).
 2. One could change the date range in the [ChinaAshare/retrieve_2015_data/retrieve2015data.py](https://github.com/broken1999/ChinaAShare/blob/master/retrieve_2015_data/retrieve2015data.py) to get data of years other than 2015. The program might need to be run several times to get full copy of large data, as the web scraping process of the free data source is not stable.
 * Sample input and output: None
 * Variables, functions and parameters explained: None
