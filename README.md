@@ -29,5 +29,4 @@ based on history, focused on present
 * comparison to industry average
 #### nice to have
 * data visualization, e.g. [heat map](https://github.com/FrankBGao/HeatMap_for_TuShare).
-### Programming packages/projects involed:
-[TuShare](http://tushare.org); Anaconda (Pandas, Numpy)
+## User's guide/ manual/ quick start [click here](https://github.com/broken1999/ChinaAShare/blob/master/User's_Guide.md)
