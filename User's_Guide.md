@@ -31,7 +31,8 @@ Python 2, Numpy, Pandas, [TuShare](https://pypi.org/project/tushare/)
 
 
 ## Details of [ChinaAshare/retrieve_2015_data/retrieve2015data.py](https://github.com/broken1999/ChinaAShare/blob/master/retrieve_2015_data/retrieve2015data.py)
-One does **NOT** need to run [ChinaAshare/retrieve_2015_data/retrieve2015data.py](https://github.com/broken1999/ChinaAShare/blob/master/retrieve_2015_data/retrieve2015data.py). The program is designed download to the hard disk the stock data of 2015, named as \*.pkl files. However, the \*.pkl files are given in the Github folder [ChinaAshare/retrieve_2015_data/](https://github.com/broken1999/ChinaAShare/blob/master/retrieve_2015_data/).
+1. One does **NOT** need to run [ChinaAshare/retrieve_2015_data/retrieve2015data.py](https://github.com/broken1999/ChinaAShare/blob/master/retrieve_2015_data/retrieve2015data.py). The program is designed download the stock data of 2015 to the hard disk, named as \*.pkl files. However, the \*.pkl files are readily given in the Github folder [ChinaAshare/retrieve_2015_data/](https://github.com/broken1999/ChinaAShare/blob/master/retrieve_2015_data/).
+2. One could change the date range in the [ChinaAshare/retrieve_2015_data/retrieve2015data.py](https://github.com/broken1999/ChinaAShare/blob/master/retrieve_2015_data/retrieve2015data.py) to get data of years other than 2015. The program might need to be run several times to get full copy of large data, as the web scraping process of the free data source is not stable.
 * Sample input and output: None
 * Variables, functions and parameters explained: None
 
