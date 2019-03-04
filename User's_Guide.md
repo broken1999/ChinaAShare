@@ -3,13 +3,13 @@
 This program is designed to play with the critical data of China A share. It serves as a **tool for stock selection**.<br>
 Here are two major pieces of code<br>
 * [ChinaAShare/main.py](https://github.com/broken1999/ChinaAShare/blob/master/main.py) is the main tool
-* [ChinaAshare/retrieve_2015_data/retrieve2015data.py](https://github.com/broken1999/ChinaAShare/blob/master/retrieve_2015_data/retrieve2015data.py) is the program used to download historical data of 2015. The year 2015 is chosen, because A share had a peak by then which now can be used as the ceiling of growth.
+* [ChinaAshare/retrieve_2015_data/retrieve2015data.py](https://github.com/broken1999/ChinaAShare/blob/master/retrieve_2015_data/retrieve2015data.py) is the program used to download the highest price (前复权) of 2015. The year 2015 is chosen, because A share had a peak by then which now can be used as the ceiling of growth.
 
 ## Prerequisites
-Python 2, Numpy, Pandas, [TuShare](https://pypi.org/project/tushare/)
+Anaconda Python 3, Numpy, Pandas, [TuShare](https://pypi.org/project/tushare/)
 
 ## Details of [ChinaAShare/main.py](https://github.com/broken1999/ChinaAShare/blob/master/main.py)
-1. Run [ChinaAShare/main.py](https://github.com/broken1999/ChinaAShare/blob/master/main.py) in Python 2. The most [recent daily data](http://tushare.org/trading.html#id4) will be loaded into memory and a copy of it will be saved on disk with name \*.pkl.<br>
+1. Run [ChinaAShare/main.py](https://github.com/broken1999/ChinaAShare/blob/master/main.py) in Python 3. The most [recent daily data](https://tushare.pro/document/2?doc_id=27) will be loaded into memory and a copy of it will be saved on disk with name \*.pkl.<br>
 2. Now we can play with the data stored in the variable called `ctb` and `basics`.<br>
 
 #### Play with price-book value ratio (PB)
@@ -30,9 +30,9 @@ Python 2, Numpy, Pandas, [TuShare](https://pypi.org/project/tushare/)
 
 
 ## Details of [ChinaAshare/retrieve_2015_data/retrieve2015data.py](https://github.com/broken1999/ChinaAShare/blob/master/retrieve_2015_data/retrieve2015data.py)
-1. One does **NOT** need to run [ChinaAshare/retrieve_2015_data/retrieve2015data.py](https://github.com/broken1999/ChinaAShare/blob/master/retrieve_2015_data/retrieve2015data.py). The program is designed to download the stock data of 2015 to the hard disk, named as \*.pkl files. However, the \*.pkl files are readily given in the Github folder [ChinaAshare/retrieve_2015_data/](https://github.com/broken1999/ChinaAShare/blob/master/retrieve_2015_data/).
-2. One could change the date range in the [ChinaAshare/retrieve_2015_data/retrieve2015data.py](https://github.com/broken1999/ChinaAShare/blob/master/retrieve_2015_data/retrieve2015data.py) to get data of years other than 2015. The program might need to be run several times to get full copy of large data, as the web scraping process of the free data source is not stable.
-* Sample input and output: None
+1. One does **NOT** need to run [ChinaAshare/retrieve_2015_data/retrieve2015data.py](https://github.com/broken1999/ChinaAShare/blob/master/retrieve_2015_data/retrieve2015data.py). The program is designed to download the stock data of 2015 to the hard disk, named as HighPoint2015.pkl, which is readily given in the Github folder [ChinaAshare/retrieve_2015_data/](https://github.com/broken1999/ChinaAShare/blob/master/retrieve_2015_data/).
+2. Nevertheless, one could change the date range in the [ChinaAshare/retrieve_2015_data/retrieve2015data.py](https://github.com/broken1999/ChinaAShare/blob/master/retrieve_2015_data/retrieve2015data.py) to get data of years other than 2015.
+* Sample input and output: no input needed; output is file HighPoint2015.pkl
 * Variables, functions and parameters explained:<br>
 `Time_rangemin` the start date of data retrieval<br>
 `Time_rangemax` the end date of data retrieval<br>
