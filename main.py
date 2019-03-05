@@ -35,7 +35,7 @@ refresh = 1
 if refresh:
     ## today quotation
     td = ts.get_today_all()
-    #todaydate=datetime.datetime.today().strftime('%Y%m%d')
+    todaydate=datetime.datetime.today().strftime('%Y%m%d')
     #td = tspro.daily_basic(trade_date=todaydate)
     td.to_pickle('td'+todaydate+'.pkl')
     ## performance
