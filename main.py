@@ -34,9 +34,9 @@ refresh = 1
 
 if refresh:
     ## today quotation
-    td = ts.get_today_all()
+    #td = ts.get_today_all()
     todaydate=datetime.datetime.today().strftime('%Y%m%d')
-    #td = tspro.daily_basic(trade_date=todaydate)
+    td = tspro.daily_basic(trade_date=todaydate)
     td.to_pickle('td'+todaydate+'.pkl')
     ## performance
     #yj = ts.get_report_data(2017, 3)
@@ -62,21 +62,23 @@ if (1 - refresh):
 #ctb = pd.concat([name, trade[~trade.index.duplicated(keep='first')], bvps], axis=1)
 
 # HighPoint2015vtrade
-tdbackup=td
-HighPoint2015wcode = pd.concat([StockBasic.set_index('ts_code') , HighPoint2015.set_index('ts_code')], axis = 1, join = 'inner')
-HighPoint2015wcode = HighPoint2015wcode.rename(columns={'symbol':'code'})
-HighPoint2015wcode = HighPoint2015wcode.set_index('code')
-HighPoint2015wcode.sort_index(inplace = True)
-td=tdbackup
-td = td[~td.index.duplicated(keep='first')].set_index('code')
-td = td.drop_duplicates(subset = 'name')
-td.sort_index(inplace = True)
-tdwHighPoint2015 = pd.concat([td, HighPoint2015wcode], axis = 1)#, join = 'inner')
-tdwHighPoint2015 = pd.merge(td, HighPoint2015wcode, left_index=True, right_index=True)
-tdwHighPoint2015['HighPoint2015vtrade'] = tdwHighPoint2015['HighPoint2015']/tdwHighPoint2015['trade']
-tdwHighPoint2015select = tdwHighPoint2015[['name_x','pb','HighPoint2015vtrade','HighPoint2015','trade','industry']]
+#HighPoint2015wcode = pd.concat([StockBasic.set_index('ts_code') , HighPoint2015.set_index('ts_code')], axis = 1, join = 'inner')
+#HighPoint2015wcode = HighPoint2015wcode.rename(columns={'symbol':'code'})
+#HighPoint2015wcode = HighPoint2015wcode.set_index('code')
+#HighPoint2015wcode.sort_index(inplace = True)
+td = td.set_index('ts_code')
+td = td.sort_index()
+HighPoint2015 = HighPoint2015.set_index('ts_code')
 
-selection=tdwHighPoint2015select[(tdwHighPoint2015select['pb']>0.01) & (tdwHighPoint2015select['pb']<1.2) & (tdwHighPoint2015select['HighPoint2015vtrade']>10)]
+tdwHighPoint2015 = pd.concat([td, HighPoint2015], axis=1, join = 'inner')
+
+tdwHighPoint2015['HighPoint2015vclose'] = tdwHighPoint2015['HighPoint2015']/tdwHighPoint2015['close']
+
+tdwHighPoint2015 = pd.concat([tdwHighPoint2015, StockBasic.set_index('ts_code')], axis=1, join='inner')
+tdwHighPoint2015select = tdwHighPoint2015[['name','pb','pe','HighPoint2015vclose','industry']]
+selection=tdwHighPoint2015select[(tdwHighPoint2015select['pb']>0.01) & (tdwHighPoint2015select['pb']<1.2) & (tdwHighPoint2015select['HighPoint2015vclose']>8)& (tdwHighPoint2015select['HighPoint2015vclose']<=9)]
+selection=tdwHighPoint2015select[(tdwHighPoint2015select['pb']>0.01) & (tdwHighPoint2015select['pb']<1.2) & (tdwHighPoint2015select['pe']<15)& (tdwHighPoint2015select['HighPoint2015vclose']>5)]
+selection=tdwHighPoint2015select[(tdwHighPoint2015select['pb']>0.01) & (tdwHighPoint2015select['pb']<5) & (tdwHighPoint2015select['pe']<10)& (tdwHighPoint2015select['HighPoint2015vclose']>5)]
 selection
 
 ###### PB, price-book value ratio, selection
