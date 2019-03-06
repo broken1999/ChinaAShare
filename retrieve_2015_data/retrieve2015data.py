@@ -3,78 +3,28 @@ import numpy as np
 import pandas as pd
 from pandas import Series, DataFrame
 import tushare as ts
-import matplotlib.pyplot as plt
 
+#ts.set_token('09f77414f088aad7959f5eecba391fe685ea50462e208ce451b1b6a6')
+pro = ts.pro_api('09f77414f088aad7959f5eecba391fe685ea50462e208ce451b1b6a6')
+StockBasic = pro.query('stock_basic', list_status='L')
 
-def tbt(ctb, lowlim=0, upplim=1):
-    ## (trade-bvps)/trade=tbt
-    ## np.sign(NaN) will generate warning "RuntimeWarning: invalid value encountered in sign"
-    btt = Series((ctb['trade'] - ctb['bvps']) / ctb['trade'], index=ctb.index.values, name='btt')
-    ## code, trade, bvps, (bvps-trade)/bvps=btb
-    ctbbtt = pd.concat([ctb, btt], axis=1)
-    return ctbbtt[(ctbbtt['btt'] >= lowlim) & (ctbbtt['btt'] < upplim)].sort_values(['btt'])
+# 主板，20151231前上市，
+stockcodepool = StockBasic[(StockBasic['list_date']<'20151231') & (StockBasic['market']=='主板')]
 
-# PB price-book value ratio
-def PB(ctb, lowlim=0, upplim=np.inf):
-    ## trade/bvps=PB
-    ## np.sign(NaN) will generate warning "RuntimeWarning: invalid value encountered in sign"
-    PB = Series(ctb['trade'] / ctb['bvps'], index=ctb.index.values, name='PB')
-    ## code, trade, bvps, trade/bvps=PB
-    ctbtb = pd.concat([ctb, PB], axis=1)
-    return ctbtb[(ctbtb['PB'] >= lowlim) & (ctbtb['PB'] < upplim)].sort_values(['PB'])
+# find the peak value of stock price in year 2015
+Time_rangemin='20150101'
+Time_rangemax='20151231'
 
-
-## load data
-refresh = 0
-
-if refresh:
-    ## today quotation
-    td = ts.get_today_all()
-    td.to_pickle('td.pkl')
-    ## performance
-    yj = ts.get_report_data(2017, 3)
-    yj.to_pickle('yj.pkl')
-    ## basics
-    basics = ts.get_stock_basics()
-    basics.to_pickle('basics.pkl')
-if (1 - refresh):
-    td = pd.read_pickle('td.pkl')
-    yj = pd.read_pickle('yj.pkl')
-    basics = pd.read_pickle('basics.pkl')
-
-## construct dataframe code, trade, bvps
-trade = td[['code', 'trade']].set_index('code')
-bvps = basics['bvps'].to_frame()
-name = basics[['name', 'industry']]  # .to_frame()
-#name.drop_duplicates(keep=False,inplace=True)
-name.drop_duplicates(keep=False)
-ctb = pd.concat([name, trade[~trade.index.duplicated(keep='first')], bvps], axis=1)
-
-
-###### PB, price-book value ratio, selection
-PB_rangemin=0.01
-PB_rangemax=0.5
-PBselection=td[ (td['pb']>PB_rangemin) & (td['pb'] <PB_rangemax)].sort_values(['pb'])
-
-####### room for growth:  high point 2015 /  trade
-Time_rangemin='2015-01-01'
-Time_rangemax='2015-12-31'
-
-# find stock code pool and avoid duplicate
-stockcodepool=td['code']
-
-filenames=os.listdir('.')
-for stockcode in stockcodepool:
-    for pklfilename in filenames:
-        if pklfilename.startswith(stockcode):
-            stockcodepool.drop(stockcodepool[stockcodepool==stockcode].index[0],inplace=True)
-
-
-HighPoint2015vTrade=pd.Series(name='HighPoint2015vTrade')
-for stockcode in stockcodepool:
+HighPoint2015 = pd.DataFrame(columns=['ts_code', 'HighPoint2015'])
+for ts_code in stockcodepool['ts_code']:
+    print(ts_code)
+    # 未复权
+    # temp = pro.monthly(ts_code=ts_code, start_date=Time_rangemin, end_date=Time_rangemax,fields='ts_code, high')
+    # 前复权， 当日收盘价 × 当日复权因子 / 最新复权因子
     try:
-        print(stockcode)
-        temp=ts.get_h_data(stockcode, start=Time_rangemin, end=Time_rangemax)
-        temp.to_pickle(stockcode+Time_rangemin.replace('-','')+Time_rangemax.replace('-','')+'.pkl')
-    except:
+        temp = ts.pro_bar(pro_api=pro, ts_code=ts_code, freq='M', adj='qfq', start_date=Time_rangemin, end_date=Time_rangemax )
+        HighPoint2015 = HighPoint2015.append(pd.DataFrame({'ts_code':[ts_code], 'HighPoint2015': [temp['high'].max()]}), ignore_index=True)
+    except TypeError:
         continue
+
+HighPoint2015.to_pickle('HighPoint'+Time_rangemin+Time_rangemax+'.pkl')
