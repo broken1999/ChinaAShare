@@ -10,10 +10,10 @@ Anaconda Python 3, Numpy, Pandas, [TuShare](https://pypi.org/project/tushare/)
 
 ## Details of [ChinaAShare/main.py](https://github.com/broken1999/ChinaAShare/blob/master/main.py)
 1. Run [ChinaAShare/main.py](https://github.com/broken1999/ChinaAShare/blob/master/main.py) in Python 3. The most [recent daily data](https://tushare.pro/document/2?doc_id=27) will be loaded into memory and a copy of it will be saved on disk with name \*.pkl.<br>
-2. Now we can play with the data stored in the variable called `ctb` and `basics`.<br>
+2. Now we can play with the data stored in the variable called `td`, `StockBasic` and `HighPoint2015`.<br>
 * Variables, functions and parameters explained: <br> 
 `td` today's data. [details](https://tushare.pro/document/2?doc_id=32) <br>
-`StockBasics` basic data of stocks. [details](https://tushare.pro/document/2?doc_id=25) <br>
+`StockBasic` basic data of stocks. [details](https://tushare.pro/document/2?doc_id=25) <br>
 
 
 #### Play with price-book value ratio (PB)
