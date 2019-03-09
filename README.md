@@ -2,7 +2,7 @@
 based on history, focused on present
 ## The aim of this project:
 * Spot the ideal target of investment in `China A share` stock exchange market.
-* Reduce the manual effort using Python program.  
+* Reduce the manual effort by using Python program.  
 ## Current features:
 * retrieve daily quote. [details](https://tushare.pro/document/2?doc_id=32)
 * retrieve the quote in year 2015. [details](https://tushare.pro/document/2?doc_id=109) Especially the highest stock price before the crash.
