@@ -37,5 +37,7 @@ for ts_code in stockcodepool['ts_code']:
         HighPoint2015 = HighPoint2015.append(pd.DataFrame({'ts_code':[ts_code], 'HighPoint2015': [HighPoint], 'AdjustmentFactorHighPointDate':[AdjustmentFactorHighPointDate.at[0,'adj_factor']]}), ignore_index=True, sort=True)
     except TypeError:
         continue
+    except IndexError:
+        continue
 
 HighPoint2015.to_pickle('HighPoint'+Time_rangemin+Time_rangemax+'.pkl')
