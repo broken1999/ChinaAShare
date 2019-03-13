@@ -12,6 +12,7 @@ based on history, focused on present
 ## Possible future features:
 #### Planned:
 * comparison to industry average
+* bellwether criteria: cheap price, small total market value
 #### nice to have
 * data visualization, e.g. [heat map](https://github.com/FrankBGao/HeatMap_for_TuShare).
 ## User's guide/ manual/ quick start [click here](https://github.com/broken1999/ChinaAShare/blob/master/User's_Guide.md)
