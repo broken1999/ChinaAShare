@@ -1,7 +1,7 @@
-# quote of today, indicators explaned
+# TodayQuote
 This folder contains the Excel file of the quote of today (or most recent).
 
-# Explanations of the indicators (column name) of the Excel file
+# Explanations of the indicators (column names) in the Excel file
 `ts_code` 股票编码，SZ深圳，SH上海 <br>
 `name` 股票名 <br>
 `industry` 所在行业 <br>
