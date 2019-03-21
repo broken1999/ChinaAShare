@@ -13,6 +13,7 @@ based on history, focused on present
 ## Possible future features:
 #### Planned:
 * bellwether criteria: cheap price, small total market value
+* Peak value of PB and PE in 2015 as supplement for the 'room for growth' indicatd by quotient of highest price in 2015 and current price.
 #### nice to have
 * data visualization, e.g. [heat map](https://github.com/FrankBGao/HeatMap_for_TuShare).
 ## User's guide/ manual/ quick start [click here](https://github.com/broken1999/ChinaAShare/blob/master/User's_Guide.md)
