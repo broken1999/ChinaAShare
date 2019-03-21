@@ -45,7 +45,7 @@ td = td.sort_index()
 HighPoint2015 = HighPoint2015.set_index('ts_code')
 HighPoint2015 = HighPoint2015.sort_index()
 
-tdwHighPoint2015 = pd.concat([td, HighPoint2015, AdjustmentFactorToday, StockBasic.set_index('ts_code')], axis=1, join='inner')
+tdwHighPoint2015 = pd.concat([td, HighPoint2015, AdjustmentFactorToday, StockBasic.set_index('ts_code')], axis=1, join='outer', sort=True)
 
 tdwHighPoint2015['HighPoint2015vclose'] = tdwHighPoint2015['HighPoint2015'] * tdwHighPoint2015[
     'AdjustmentFactorHighPointDate'] / tdwHighPoint2015['AdjustmentFactorToday'] / tdwHighPoint2015['close']
@@ -65,13 +65,16 @@ for industryname in ListofIndustries[1:]:
     tdwHighPoint2015wIndustrialPercentage=pd.concat([tdwHighPoint2015wIndustrialPercentage,tobenormalized])
 tdwHighPoint2015wIndustrialPercentage=tdwHighPoint2015wIndustrialPercentage.sort_index()
 
+tdwHighPoint2015wIndustrialPercentage_fulllistoutput=tdwHighPoint2015wIndustrialPercentage[['name','industry','HighPoint2015vclose','HighPoint2015vclose_IndustrialPercentage','pb','pb_IndustrialPercentage','pe']]
+tdwHighPoint2015wIndustrialPercentage_fulllistoutput.to_excel("HighPoint2015_PB_PE_fulllist"+todaydate+".xlsx")
+
 
 ###### selection based on 'pb_IndustrialPercentage' and 'HighPoint2015vclose_IndustrialPercentage'
-pb_rangemin = 0.0
+pb_rangemin = -np.inf
 pb_rangemax = np.inf
 pb_IndustrialPercentage_rangemin = -np.inf
 pb_IndustrialPercentage_rangemax =  np.inf
-HighPoint2015vclose_rangemin = 5
+HighPoint2015vclose_rangemin = -np.inf
 HighPoint2015vclose_rangemax = np.inf
 HighPoint2015vclose_IndustrialPercentage_rangemin = -np.inf
 HighPoint2015vclose_IndustrialPercentage_rangemax =  np.inf
@@ -84,6 +87,6 @@ selection = tdwHighPoint2015wIndustrialPercentage[
                    & (tdwHighPoint2015wIndustrialPercentage['HighPoint2015vclose'] <= HighPoint2015vclose_rangemax)
                    & (tdwHighPoint2015wIndustrialPercentage['HighPoint2015vclose_IndustrialPercentage'] >= HighPoint2015vclose_IndustrialPercentage_rangemin)
                    & (tdwHighPoint2015wIndustrialPercentage['HighPoint2015vclose_IndustrialPercentage'] <= HighPoint2015vclose_IndustrialPercentage_rangemax)]
-selection_output = selection[['name','industry','pb','pb_IndustrialPercentage','HighPoint2015vclose','HighPoint2015vclose_IndustrialPercentage']]
+selection_output = selection[['name','industry','HighPoint2015vclose','HighPoint2015vclose_IndustrialPercentage','pb','pb_IndustrialPercentage','pe']]
 print(selection_output)
-selection_output.to_excel("selection.xlsx")
+selection_output.to_excel("HighPoint2015_PB_PE_selected"+todaydate+".xlsx")
