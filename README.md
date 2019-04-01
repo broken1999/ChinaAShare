@@ -12,6 +12,7 @@ based on history, focused on present
 * Price book value ratio is seen as an indicator of valuation.
 ## Possible future features:
 #### Planned:
+* better ranking, percentile in industry/section
 * bellwether criteria: cheap price, small total market value
 * Peak value of PB and PE in 2015 as supplement for the 'room for growth' indicatd by quotient of highest price in 2015 and current price.
 #### nice to have
