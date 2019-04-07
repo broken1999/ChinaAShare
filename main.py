@@ -1,3 +1,4 @@
+import os
 import numpy as np
 import pandas as pd
 from pandas import Series, DataFrame
@@ -5,8 +6,8 @@ import tushare as ts
 import matplotlib.pyplot as plt
 import datetime
 
-pd.set_option('display.max_rows', None)
-pd.set_option('display.max_columns', None)
+#pd.set_option('display.max_rows', None)
+#pd.set_option('display.max_columns', None)
 
 tspro = ts.pro_api('09f77414f088aad7959f5eecba391fe685ea50462e208ce451b1b6a6')
 StockBasic = tspro.query('stock_basic', list_status='L')
@@ -20,6 +21,19 @@ def normalize( value, value_min, value_max ):
 
 ###### load today data
 refresh = 1
+
+# change date to most recent working day if today is holiday/ weekend
+holidays=['20190101','20190204','20190205','20190206','20190207','20190208','20190405','20190501','20190607','20190913','20191001','20191002','20191003','20191004','20191007']
+weekday=datetime.datetime.today().weekday()
+while (weekday == 5) or (weekday == 6) or (todaydate in holidays):
+    # find the most recent working date
+    todaydate=str(int(todaydate)-1)
+    weekday = datetime.date(int(todaydate[0:4]), int(todaydate[4:6]), int(todaydate[6:8])).weekday()
+
+# not refresh when file exists and valid
+if os.path.exists('td' + todaydate + '.pkl'):
+    if os.stat('td' + '20190405' + '.pkl').st_size > 1000:
+        refresh = 0
 
 if refresh:
     ## today quotation
@@ -38,6 +52,29 @@ if (1 - refresh):
     td = pd.read_pickle('td' + todaydate + '.pkl')
     AdjustmentFactorToday = AdjustmentFactorToday.read_pickle('AdjustmentFactorToday' + todaydate + '.pkl')
 
+###### refresh financial indicators
+
+refresh = 0
+financialindicatorreportperiod = '20181231'
+
+if refresh:
+    ## prepare financial indicators
+    FinancialIndicators = pd.DataFrame()
+    for ts_code in StockBasic['ts_code']:
+        financialindicator = tspro.fina_indicator(ts_code=ts_code, period=financialindicatorreportperiod)
+        FinancialIndicators = FinancialIndicators.append(financialindicator)
+
+    FinancialIndicators = FinancialIndicators.set_index('ts_code')
+    FinancialIndicators.to_pickle('FinancialIndicators' + financialindicatorreportperiod + '.pkl')
+
+if (1 - refresh):
+    FinancialIndicators = pd.read_pickle('FinancialIndicators' + financialindicatorreportperiod + '.pkl')
+
+
+###### export today quote + financial indicators Excel
+tdwFinancialIndicators = pd.concat([td.set_index('ts_code'), FinancialIndicators], axis=1, join='outer', sort=True)
+tdwFinancialIndicators.to_excel("TodayQuote_FinancialIndicators"+todaydate+".xlsx")
+
 
 ###### prepare HighPoint2015vclose
 td = td.set_index('ts_code')
@@ -49,6 +86,11 @@ tdwHighPoint2015 = pd.concat([td, HighPoint2015, AdjustmentFactorToday, StockBas
 
 tdwHighPoint2015['HighPoint2015vclose'] = tdwHighPoint2015['HighPoint2015'] * tdwHighPoint2015[
     'AdjustmentFactorHighPointDate'] / tdwHighPoint2015['AdjustmentFactorToday'] / tdwHighPoint2015['close']
+
+#######selection_output = selection[['name','industry','HighPoint2015vclose','HighPoint2015vclose_IndustrialPercentage','pb','pb_IndustrialPercentage','pe']]
+print(selection_output)
+selection_output.to_excel("HighPoint2015_PB_PE_selected_"+todaydate+".xlsx")
+
 
 ###### normalize the values into percentage according to industries
 tdwHighPoint2015wIndustrialPercentage=pd.DataFrame()
@@ -89,4 +131,7 @@ selection = tdwHighPoint2015wIndustrialPercentage[
                    & (tdwHighPoint2015wIndustrialPercentage['HighPoint2015vclose_IndustrialPercentage'] <= HighPoint2015vclose_IndustrialPercentage_rangemax)]
 selection_output = selection[['name','industry','HighPoint2015vclose','HighPoint2015vclose_IndustrialPercentage','pb','pb_IndustrialPercentage','pe']]
 print(selection_output)
-selection_output.to_excel("HighPoint2015_PB_PE_selected"+todaydate+".xlsx")
+selection_output.to_excel("HighPoint2015_PB_PE_selected_"+todaydate+".xlsx")
+
+
+
