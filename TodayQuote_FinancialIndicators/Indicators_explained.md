@@ -1,5 +1,6 @@
-# TodayQuote
-This folder contains the Excel file of:<br>
+# TodayQuote_FinancialIndicators
+
+The Excel file contains:<br>
 quote of today (or most recent working day) <br>
 financial indicators 年度财务数据指标 <br>
 
